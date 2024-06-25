@@ -18,6 +18,12 @@ app.initializers.add('datlechin/flarum-simple-tour-guide', () => {
 
     let tourGuideSteps: TourGuideStep[] = [];
 
+    // nk-specific
+    let route = m.route.get();
+    if (!route.startsWith('/all') && !route.startsWith('/t/')) {
+      return
+    }
+
     await app.store.find<TourGuideStep[]>(`tour-guide-steps`).then((steps) => {
       tourGuideSteps = steps;
     });
